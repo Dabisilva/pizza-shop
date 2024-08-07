@@ -18,11 +18,11 @@ export type OrderDetailsProps = {
   id: string
 }
 
-export function OrderDetails(props: OrderDetailsProps) {
+export function OrderDetails({ id }: OrderDetailsProps) {
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Pedido: {props.id}</DialogTitle>
+        <DialogTitle>Pedido: {id}</DialogTitle>
         <DialogDescription>Detalhes do pedido</DialogDescription>
       </DialogHeader>
       <div className="space-y-6">
