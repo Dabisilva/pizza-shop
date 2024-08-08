@@ -26,7 +26,9 @@ export function OrderStatus({ status }: OrderStatusProps) {
         return <span className="h-2 w-2 rounded-full bg-rose-500"></span>
       case 'delivered':
         return <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-      case 'processing' || 'delivering':
+      case 'processing':
+        return <span className="h-2 w-2  rounded-full bg-amber-500 "></span>
+      case 'delivering':
         return <span className="h-2 w-2  rounded-full bg-amber-500 "></span>
       default:
         break
