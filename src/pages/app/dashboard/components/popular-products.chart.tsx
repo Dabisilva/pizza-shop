@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { BarChart } from 'lucide-react'
+import { BarChart, Loader2 } from 'lucide-react'
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts'
 import colors from 'tailwindcss/colors'
 
@@ -18,7 +18,7 @@ type LabelProps = {
 }
 
 export function PopularProductsChart() {
-  const { data: popularProducts } = useQuery({
+  const { data: popularProducts, isLoading } = useQuery({
     queryKey: ['metrics', 'popular-products'],
     queryFn: getPopularProducts,
   })
@@ -55,6 +55,51 @@ export function PopularProductsChart() {
     )
   }
 
+  function Content() {
+    if (isLoading) {
+      return (
+        <div className="flex h-[240px] w-full items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        </div>
+      )
+    } else {
+      return (
+        <>
+          {popularProducts?.length ? (
+            <ResponsiveContainer width="100%" height={240}>
+              <PieChart style={{ fontSize: 12 }}>
+                <Pie
+                  data={popularProducts}
+                  dataKey="amount"
+                  nameKey="product"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={86}
+                  innerRadius={64}
+                  strokeWidth={8}
+                  labelLine={false}
+                  label={Label}
+                >
+                  {popularProducts.map((_, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index]}
+                      className="stroke-card hover:opacity-80"
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="flex h-[240px] w-full items-center justify-center">
+              <span className="font-bold">Sem dados no momento</span>
+            </div>
+          )}
+        </>
+      )
+    }
+  }
+
   return (
     <Card className="col-span-3">
       <CardHeader className="pb-8">
@@ -66,32 +111,7 @@ export function PopularProductsChart() {
         </div>
       </CardHeader>
       <CardContent>
-        {popularProducts && (
-          <ResponsiveContainer width="100%" height={240}>
-            <PieChart style={{ fontSize: 12 }}>
-              <Pie
-                data={popularProducts}
-                dataKey="amount"
-                nameKey="product"
-                cx="50%"
-                cy="50%"
-                outerRadius={86}
-                innerRadius={64}
-                strokeWidth={8}
-                labelLine={false}
-                label={Label}
-              >
-                {popularProducts.map((_, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index]}
-                    className="stroke-card hover:opacity-80"
-                  />
-                ))}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
-        )}
+        <Content />
       </CardContent>
     </Card>
   )
