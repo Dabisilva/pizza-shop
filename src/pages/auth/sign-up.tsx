@@ -48,7 +48,7 @@ export function SignUp() {
         },
       })
     } catch (error) {
-      toast.error('Ocorreu um erro')
+      toast.error('Erro ao cadastrar restaurante')
     }
   }
 
@@ -111,7 +111,7 @@ export function SignUp() {
             </div>
 
             <Button type="submit" className="w-full" disabled={isSubmitting}>
-              Acessar painel
+              Finalizar cadastro
             </Button>
 
             <p className="px-6 text-center text-sm leading-relaxed text-muted-foreground">

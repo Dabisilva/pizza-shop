@@ -9,7 +9,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "e2e": "pnpm playwright test --ui"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -44,6 +45,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.47.1",
     "@rocketseat/eslint-config": "^2.2.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
