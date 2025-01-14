@@ -62,7 +62,7 @@ export function SignIn() {
               Acessar painel
             </h1>
             <p className="text-sm text-muted-foreground">
-              Acompanhe suas vendas pelo painer do parceiro
+              Acompanhe suas vendas pelo painel do parceiro
             </p>
           </div>
 
