@@ -48,7 +48,7 @@ export function StoreProfileDialog() {
         description,
       })
     }
-    return { previusProfile: cached }
+    return { previusProfile: cached as StoreProfileSchema }
   }
 
   const { mutateAsync: updateProfileAyncFn } = useMutation({
@@ -75,6 +75,7 @@ export function StoreProfileDialog() {
 
   async function handleUpdateProfile(data: StoreProfileSchema) {
     try {
+      // @ts-expect-error-error
       await updateProfileAyncFn(data)
 
       toast.success('Perfil Atualizado com sucesso')
