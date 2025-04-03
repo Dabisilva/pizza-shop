@@ -1,0 +1,64 @@
+# Project Rules and Guidelines
+
+## Architecture
+
+- Follow React 18 best practices with TypeScript
+- Use functional components with hooks
+- Implement proper type safety throughout the application
+- Follow the existing directory structure:
+  - src/api/ for API-related code
+  - src/components/ for reusable UI components
+  - src/pages/ for page components
+  - src/hooks/ for custom hooks
+  - src/lib/ for utility functions
+  - src/routes/ for routing configuration
+  - src/assets/ for static assets
+
+## Styling
+
+- Use Tailwind CSS for styling
+- Follow the existing component structure with Radix UI primitives
+- Maintain consistent spacing and design tokens
+- Use CSS modules only when necessary
+
+## State Management
+
+- Use React Query for server state management
+- Use React Hook Form for form state
+- Keep local state minimal and lift state up when needed
+- Use proper TypeScript types for all state
+
+## Testing
+
+- Write unit tests with Vitest
+- Write E2E tests with Playwright
+- Follow testing best practices
+- Maintain good test coverage
+
+## Code Quality
+
+- Follow ESLint rules from @rocketseat/eslint-config
+- Use Prettier for code formatting
+- Keep components small and focused
+- Use proper TypeScript types and interfaces
+- Document complex logic with comments
+
+## Performance
+
+- Implement proper code splitting
+- Optimize images and assets
+- Use proper memoization when needed
+- Follow React performance best practices
+
+## Security
+
+- Never expose sensitive data in client-side code
+- Validate all user inputs
+- Use proper authentication and authorization
+- Follow security best practices for API calls
+
+## Git
+
+- Write meaningful commit messages
+- Keep commits focused and atomic
+- Follow the existing .gitignore rules
