@@ -58,7 +58,7 @@ export function RenevueChart() {
     } else {
       return (
         <>
-          {chartData?.length ? (
+          {chartData?.length && chartData.length > 0 ? (
             <ResponsiveContainer width="100%" height={240}>
               <LineChart style={{ fontSize: 12 }} data={chartData}>
                 <XAxis

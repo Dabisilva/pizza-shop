@@ -1,21 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
 import { BarChart, Loader2 } from 'lucide-react'
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts'
+import { ReactElement } from 'react'
+import {
+  Cell,
+  Pie,
+  PieChart,
+  PieLabelRenderProps,
+  ResponsiveContainer,
+} from 'recharts'
 import colors from 'tailwindcss/colors'
 
 import { getPopularProducts } from '@/api'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-
-type LabelProps = {
-  midAngle: number
-  cx: string
-  cy: string
-  startAngle: number
-  innerRadius: number
-  outerRadius: number
-  index: number
-  value: string
-}
 
 export function PopularProductsChart() {
   const { data: popularProducts, isLoading } = useQuery({
@@ -31,26 +27,44 @@ export function PopularProductsChart() {
     colors.rose['500'],
   ]
 
-  function Label(item: LabelProps) {
+  function Label(props: PieLabelRenderProps): ReactElement | null {
     const RADIAN = Math.PI / 180
-    const radius = 12 + item.innerRadius + (item.outerRadius - item.innerRadius)
-    const x = item.cx + radius * Math.cos(-item.midAngle * RADIAN)
-    const y = item.cy + radius * Math.sin(-item.midAngle * RADIAN)
+    const { cx, cy, midAngle, innerRadius, outerRadius, index, value } = props
+
+    if (
+      typeof cx !== 'number' ||
+      typeof cy !== 'number' ||
+      typeof midAngle !== 'number' ||
+      typeof innerRadius !== 'number' ||
+      typeof outerRadius !== 'number' ||
+      typeof index !== 'number' ||
+      value === undefined ||
+      value === null
+    ) {
+      return null
+    }
+
+    const radius = 12 + innerRadius + (outerRadius - innerRadius)
+    const x = cx + radius * Math.cos(-midAngle * RADIAN)
+    const y = cy + radius * Math.sin(-midAngle * RADIAN)
 
     if (!popularProducts) return null
+
+    const product = popularProducts[index]
+    if (!product) return null
 
     return (
       <text
         x={x}
         y={y}
         className="fill-muted-foreground text-xs"
-        textAnchor={x > item.cx ? 'start' : 'end'}
+        textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
       >
-        {popularProducts[item.index].product.length > 12
-          ? popularProducts[item.index].product.substring(0, 12).concat('...')
-          : popularProducts[item.index].product}{' '}
-        ({item.value})
+        {product.product.length > 12
+          ? product.product.substring(0, 12).concat('...')
+          : product.product}{' '}
+        ({String(value)})
       </text>
     )
   }

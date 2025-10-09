@@ -19,8 +19,8 @@ describe('NavLink', () => {
       },
     )
 
-    expect(wrapper.getByText('Home').dataset.current).toEqual('true')
-    expect(wrapper.getByText('About').dataset.current).toEqual('false')
+    expect(wrapper.getByText('Home').dataset['current']).toEqual('true')
+    expect(wrapper.getByText('About').dataset['current']).toEqual('false')
 
     wrapper.debug()
   })
