@@ -1,13 +1,18 @@
-import { http, HttpResponse } from 'msw'
+export interface GetDailyRevenueInPeriodQuery {
+  from?: Date
+  to?: Date
+}
 
-import { GetDailyRevenueInPeriodResponse } from '../get-daily-revenue-in-period'
+export type GetDailyRevenueInPeriodResponse = {
+  date: string
+  receipt: number
+}[]
 
-export const getDailyRevenueInPeriodMock = http.get<
-  never,
-  never,
-  GetDailyRevenueInPeriodResponse
->('/metrics/daily-receipt-in-period', () => {
-  return HttpResponse.json([
+export async function getDailyRevenueInPeriod(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _query: GetDailyRevenueInPeriodQuery,
+): Promise<GetDailyRevenueInPeriodResponse> {
+  return [
     { date: '01/07/2024', receipt: 2000 },
     { date: '02/07/2024', receipt: 1830 },
     { date: '03/07/2024', receipt: 2170 },
@@ -15,5 +20,5 @@ export const getDailyRevenueInPeriodMock = http.get<
     { date: '05/07/2024', receipt: 1980 },
     { date: '06/07/2024', receipt: 1900 },
     { date: '07/07/2024', receipt: 2110 },
-  ])
-})
+  ]
+}

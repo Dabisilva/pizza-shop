@@ -1,14 +1,8 @@
-import { http, HttpResponse } from 'msw'
+export interface DispatchOrderQuery {
+  id: string
+}
 
-import { DispatchOrderQuery } from '../dispatch-order'
-
-export const dispatchOrderMock = http.patch<DispatchOrderQuery, never, never>(
-  '/orders/:id/dispatch',
-  async ({ params }) => {
-    if (params.id === 'error-order-id') {
-      return new HttpResponse(null, { status: 400 })
-    }
-
-    return new HttpResponse(null, { status: 204 })
-  },
-)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function dispatchOrder(_query: DispatchOrderQuery) {
+  return Promise.resolve()
+}

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Utensils } from 'lucide-react'
 
-import { getDayOrdersAmount } from '@/api/get-day-orders-amount'
+import { getDayOrdersAmount } from '@/api'
 
 import { DashboardCard } from './dashboard-card'
 

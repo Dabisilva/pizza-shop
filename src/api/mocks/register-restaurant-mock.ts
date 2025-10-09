@@ -1,18 +1,11 @@
-import { http, HttpResponse } from 'msw'
+export type RegisterRestaurantBody = {
+  restaurantName: string
+  managerName: string
+  email: string
+  phone: string
+}
 
-import { RegisterRestaurantBody } from '../register-restaurant'
-
-export const registerRestaurantMock = http.post<never, RegisterRestaurantBody>(
-  '/restaurants',
-  async ({ request }) => {
-    const { restaurantName } = await request.json()
-
-    if (restaurantName === 'Pizza Shop') {
-      return new HttpResponse(null, {
-        status: 201,
-      })
-    }
-
-    return new HttpResponse(null, { status: 400 })
-  },
-)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function registerRestaurant(_body: RegisterRestaurantBody) {
+  return Promise.resolve()
+}

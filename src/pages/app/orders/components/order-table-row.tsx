@@ -4,11 +4,13 @@ import { ptBR } from 'date-fns/locale'
 import { ArrowRight, Search, X } from 'lucide-react'
 import { useState } from 'react'
 
-import { approveOrder } from '@/api/approve-order'
-import { cancelOrder } from '@/api/cancel-order'
-import { deliveredOrder } from '@/api/delivered-order'
-import { dispatchOrder } from '@/api/dispatch-order'
-import { GetOrdersResponse } from '@/api/get-orders'
+import {
+  approveOrder,
+  cancelOrder,
+  deliveredOrder,
+  dispatchOrder,
+  type GetOrdersResponse,
+} from '@/api'
 import { OrderStatus, OrderStatusType } from '@/components/order-status'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'

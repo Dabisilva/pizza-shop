@@ -1,14 +1,8 @@
-import { http, HttpResponse } from 'msw'
+export interface DeliveredOrderQuery {
+  id: string
+}
 
-import { DeliveredOrderQuery } from '../delivered-order'
-
-export const deliverOrderMock = http.patch<DeliveredOrderQuery, never, never>(
-  '/orders/:id/deliver',
-  async ({ params }) => {
-    if (params.id === 'error-order-id') {
-      return new HttpResponse(null, { status: 400 })
-    }
-
-    return new HttpResponse(null, { status: 204 })
-  },
-)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function deliveredOrder(_query: DeliveredOrderQuery) {
+  return Promise.resolve()
+}

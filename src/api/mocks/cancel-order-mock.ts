@@ -1,14 +1,8 @@
-import { http, HttpResponse } from 'msw'
+export interface CancelOrderQuery {
+  id: string
+}
 
-import { CancelOrderQuery } from '../cancel-order'
-
-export const cancelOrderMock = http.patch<CancelOrderQuery, never, never>(
-  '/orders/:id/cancel',
-  async ({ params }) => {
-    if (params.id === 'error-order-id') {
-      return new HttpResponse(null, { status: 400 })
-    }
-
-    return new HttpResponse(null, { status: 204 })
-  },
-)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function cancelOrder(_query: CancelOrderQuery) {
+  return Promise.resolve()
+}

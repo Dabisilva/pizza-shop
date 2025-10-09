@@ -1,14 +1,11 @@
-import { http, HttpResponse } from 'msw'
+export interface DayOrdersAmountResponse {
+  amount: number
+  diffFromYesterday: number
+}
 
-import { DayOrdersAmountResponse } from '../get-day-orders-amount'
-
-export const getDayOrdersAmountMock = http.get<
-  never,
-  never,
-  DayOrdersAmountResponse
->('/metrics/day-orders-amount', () => {
-  return HttpResponse.json({
+export async function getDayOrdersAmount(): Promise<DayOrdersAmountResponse> {
+  return {
     amount: 20,
     diffFromYesterday: 5,
-  })
-})
+  }
+}

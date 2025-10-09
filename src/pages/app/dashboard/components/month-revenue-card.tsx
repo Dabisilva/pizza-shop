@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { DollarSign } from 'lucide-react'
 
-import { getMonthRevenue } from '@/api/get-month-revenue'
+import { getMonthRevenue } from '@/api'
 
 import { DashboardCard } from './dashboard-card'
 

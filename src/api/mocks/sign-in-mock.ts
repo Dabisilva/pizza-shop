@@ -1,21 +1,9 @@
-import { http, HttpResponse } from 'msw'
+export type SignInBody = {
+  email: string
+}
 
-import { SignInBody } from '../sign-in'
-
-export const signInMock = http.post<never, SignInBody>(
-  '/authenticate',
-  async ({ request }) => {
-    const { email } = await request.json()
-
-    if (email === 'jhondoe@exemple.com') {
-      return new HttpResponse(null, {
-        status: 200,
-        headers: {
-          'Set-Cookie': 'auth=sample-jwt',
-        },
-      })
-    }
-
-    return new HttpResponse(null, { status: 401 })
-  },
-)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function signIn(_body: SignInBody) {
+  // Accept any email - no validation needed for test project
+  return Promise.resolve()
+}

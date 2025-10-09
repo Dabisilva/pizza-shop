@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { signIn } from '@/api/sign-in'
+import { signIn } from '@/api'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -18,6 +18,7 @@ type SignInForm = z.infer<typeof signInForm>
 
 export function SignIn() {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const {
     register,
@@ -35,18 +36,17 @@ export function SignIn() {
 
   async function handleSignIn(form: SignInForm) {
     try {
-      const response = await authenticate({
+      await authenticate({
         email: form.email,
       })
-      console.log('teste', response)
-      toast.success('Sucesso', {
-        action: {
-          label: 'Reenviar',
-          onClick: () => handleSignIn(form),
-        },
-      })
+      toast.success('Login realizado com sucesso!')
+
+      // Redirect to dashboard
+      setTimeout(() => {
+        navigate('/')
+      }, 500)
     } catch {
-      toast.error('Credenciais inválidas use jhondoe@exemple.com')
+      toast.error('Erro ao fazer login. Tente novamente.')
     }
   }
 
@@ -63,7 +63,8 @@ export function SignIn() {
               Acessar painel
             </h1>
             <p className="text-sm text-muted-foreground">
-              Acompanhe suas vendas pelo painel do parceiro
+              Acompanhe suas vendas pelo painel do parceiro. Use qualquer e-mail
+              para entrar.
             </p>
           </div>
 
@@ -73,7 +74,7 @@ export function SignIn() {
               <Input
                 id="email"
                 type="email"
-                placeholder="jhondoe@gmail.com"
+                placeholder="seu-email@exemplo.com"
                 {...register('email')}
               />
             </div>

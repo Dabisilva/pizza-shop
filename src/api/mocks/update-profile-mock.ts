@@ -1,16 +1,9 @@
-import { http, HttpResponse } from 'msw'
+export interface UpdateProfileBody {
+  name: string
+  description: string
+}
 
-import { UpdateProfileBody } from '../update-profile'
-
-export const updateProfileMock = http.put<never, UpdateProfileBody>(
-  '/profile',
-  async ({ request }) => {
-    const { name } = await request.json()
-
-    if (name === 'Pizza Do Chef') {
-      return new HttpResponse(null, { status: 204 })
-    }
-
-    return new HttpResponse(null, { status: 400 })
-  },
-)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function updateProfile(_body: UpdateProfileBody) {
+  return Promise.resolve()
+}

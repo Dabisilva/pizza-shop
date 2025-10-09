@@ -1,13 +1,11 @@
-import { http, HttpResponse } from 'msw'
+export interface MonthRevenueResponse {
+  receipt: number
+  diffFromLastMonth: number
+}
 
-import { MonthRevenueResponse } from '../get-month-revenue'
-
-export const getMonthRevenueMock = http.get<never, never, MonthRevenueResponse>(
-  '/metrics/month-receipt',
-  () => {
-    return HttpResponse.json({
-      receipt: 20000,
-      diffFromLastMonth: 12,
-    })
-  },
-)
+export async function getMonthRevenue(): Promise<MonthRevenueResponse> {
+  return {
+    receipt: 20000,
+    diffFromLastMonth: 12,
+  }
+}
